@@ -1,11 +1,12 @@
 package com.app.user.service;
 
-import com.app.user.entity.User;
+import com.app.user.converter.UserConverter;
+import com.app.user.dto.UserDTO;
 import com.app.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -17,13 +18,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<UserDTO> findAll() {
+        return userRepository.findAll().stream().map(UserConverter::toUserDTO).collect(Collectors.toList());
     }
 
     @Override
-    public Optional<User> findById(Long id) {
-        return userRepository.findById(id);
+    public UserDTO findById(Long id) {
+        return UserConverter.toUserDTO(userRepository.findById(id).orElseThrow(IllegalArgumentException::new));
     }
 
 }

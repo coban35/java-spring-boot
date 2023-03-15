@@ -9,7 +9,7 @@ public class User {
     @Id
     @GeneratedValue
     @Column(name = "ID")
-    private Long userId;
+    private Long id;
 
     @Column(name = "FIRST_NAME", length = 100)
     private String firstName;
@@ -19,16 +19,15 @@ public class User {
 
     @Column(name = "USER_NAME", length = 100)
     private String userName;
-
     @Column(name = "EMAIL")
     private String email;
 
-    public Long getUserId() {
-        return userId;
+    public Long getId() {
+        return id;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {

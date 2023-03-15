@@ -1,15 +1,13 @@
 package com.app.user.service;
 
-
-import com.app.user.entity.User;
+import com.app.user.dto.UserDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserService {
 
-    List<User> findAll();
+    List<UserDTO> findAll();
 
-    Optional<User> findById(Long id);
+    UserDTO findById(Long id);
 
 }
