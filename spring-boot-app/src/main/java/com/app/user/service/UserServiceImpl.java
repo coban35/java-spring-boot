@@ -2,6 +2,7 @@ package com.app.user.service;
 
 import com.app.user.converter.UserConverter;
 import com.app.user.dto.UserDTO;
+import com.app.user.exception.UserIdNotFoundException;
 import com.app.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO findById(Long id) {
-        return UserConverter.toUserDTO(userRepository.findById(id).orElseThrow(IllegalArgumentException::new));
+        return UserConverter.toUserDTO(userRepository.findById(id).orElseThrow(UserIdNotFoundException::new));
     }
 
 }
