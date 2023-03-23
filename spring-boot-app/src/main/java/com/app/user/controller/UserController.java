@@ -1,11 +1,9 @@
 package com.app.user.controller;
 
 import com.app.user.dto.UserDTO;
+import com.app.user.entity.User;
 import com.app.user.service.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,6 +25,26 @@ public class UserController {
     @GetMapping("/findById/{id}")
     public UserDTO findById(@PathVariable("id") Long id) {
         return userService.findById(id);
+    }
+
+    @PostMapping("/save")
+    public void save(@RequestBody User user) {
+        userService.save(user);
+    }
+
+    @PostMapping("/saveAll")
+    public void saveAll(@RequestBody List<User> userList) {
+        userService.saveAll(userList);
+    }
+
+    @PostMapping("/update")
+    public void update(@RequestBody User user) {
+        userService.update(user);
+    }
+
+    @PostMapping("/deleteById/{id}")
+    public void deleteById(@PathVariable("id") Long id) {
+        userService.deleteById(id);
     }
 
 }
