@@ -5,6 +5,7 @@ import com.app.user.dto.UserDTO;
 import com.app.user.entity.User;
 import com.app.user.exception.UserIdNotFoundException;
 import com.app.user.repository.UserRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,7 +47,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteById(Long id) {
-        userRepository.deleteById(id);
+        try {
+            userRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new UserIdNotFoundException();
+        }
     }
 
 }
