@@ -7,8 +7,6 @@ import com.app.user.entity.User;
 import com.app.user.exception.UserException;
 import com.app.user.exception.UserIdNotFoundException;
 import com.app.user.repository.UserRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +16,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
     private final UserRepository userRepository;
 
@@ -43,7 +39,6 @@ public class UserServiceImpl implements UserService {
             userRepository.save(user);
             return createSuccessApiResponse();
         } catch (Exception e) {
-            LOGGER.error("An error occurred. ", e);
             throw new UserException();
         }
     }
@@ -54,7 +49,6 @@ public class UserServiceImpl implements UserService {
             userRepository.saveAll(userList);
             return createSuccessApiResponse();
         } catch (Exception e) {
-            LOGGER.error("An error occurred. ", e);
             throw new UserException();
         }
     }
@@ -65,7 +59,6 @@ public class UserServiceImpl implements UserService {
             userRepository.save(user);
             return createSuccessApiResponse();
         } catch (Exception e) {
-            LOGGER.error("An error occurred. ", e);
             throw new UserException();
         }
     }
