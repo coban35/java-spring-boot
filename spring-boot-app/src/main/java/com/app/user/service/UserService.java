@@ -1,6 +1,7 @@
 package com.app.user.service;
 
 
+import com.app.ApiResponse;
 import com.app.user.dto.UserDTO;
 import com.app.user.entity.User;
 
@@ -12,12 +13,12 @@ public interface UserService {
 
     UserDTO findById(Long id);
 
-    void save(User user);
+    ApiResponse save(User user);
 
-    void saveAll(List<User> userList);
+    ApiResponse saveAll(List<User> userList);
 
-    void update(User user);
+    ApiResponse update(User user);
 
-    void deleteById(Long id);
+    ApiResponse deleteById(Long id);
 
 }

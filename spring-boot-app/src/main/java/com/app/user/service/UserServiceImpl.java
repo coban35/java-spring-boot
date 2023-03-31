@@ -1,18 +1,25 @@
 package com.app.user.service;
 
+import com.app.ApiResponse;
 import com.app.user.converter.UserConverter;
 import com.app.user.dto.UserDTO;
 import com.app.user.entity.User;
+import com.app.user.exception.UserException;
 import com.app.user.exception.UserIdNotFoundException;
 import com.app.user.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
     private final UserRepository userRepository;
 
@@ -31,27 +38,56 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(User user) {
-        userRepository.save(user);
+    public ApiResponse save(User user) {
+        try {
+            userRepository.save(user);
+            return createSuccessApiResponse();
+        } catch (Exception e) {
+            LOGGER.error("An error occurred. ", e);
+            throw new UserException();
+        }
     }
 
     @Override
-    public void saveAll(List<User> userList) {
-        userRepository.saveAll(userList);
+    public ApiResponse saveAll(List<User> userList) {
+        try {
+            userRepository.saveAll(userList);
+            return createSuccessApiResponse();
+        } catch (Exception e) {
+            LOGGER.error("An error occurred. ", e);
+            throw new UserException();
+        }
     }
 
     @Override
-    public void update(User user) {
-        userRepository.save(user);
+    public ApiResponse update(User user) {
+        try {
+            userRepository.save(user);
+            return createSuccessApiResponse();
+        } catch (Exception e) {
+            LOGGER.error("An error occurred. ", e);
+            throw new UserException();
+        }
     }
 
     @Override
-    public void deleteById(Long id) {
+    public ApiResponse deleteById(Long id) {
         try {
             userRepository.deleteById(id);
+            return createSuccessApiResponse();
         } catch (EmptyResultDataAccessException e) {
             throw new UserIdNotFoundException();
+        } catch (Exception e) {
+            throw new UserException();
         }
+    }
+
+    private ApiResponse createSuccessApiResponse() {
+        ApiResponse apiResponse = new ApiResponse();
+        apiResponse.setCreationDate(new Date());
+        apiResponse.setCode("200");
+        apiResponse.setMessage("Success.");
+        return apiResponse;
     }
 
 }

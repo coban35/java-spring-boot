@@ -16,6 +16,13 @@ public class UserExceptionHandler extends ResponseEntityExceptionHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserExceptionHandler.class);
 
+    @ExceptionHandler(UserException.class)
+    public final ResponseEntity<ApiResponse> userException() {
+        ApiResponse apiResponse = new ApiResponse(new Date(), "500", "An error occurred.");
+        LOGGER.error("An error occurred.");
+        return new ResponseEntity<>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     @ExceptionHandler(UserIdNotFoundException.class)
     public final ResponseEntity<ApiResponse> userIdNotFoundException() {
         ApiResponse apiResponse = new ApiResponse(new Date(), "404", "User Id Not Found.");

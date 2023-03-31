@@ -10,6 +10,10 @@ public class ApiResponse {
 
     private String message;
 
+    public ApiResponse() {
+
+    }
+
     public ApiResponse(Date creationDate, String code, String message) {
         this.creationDate = creationDate;
         this.code = code;

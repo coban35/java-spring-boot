@@ -1,5 +1,6 @@
 package com.app.user.controller;
 
+import com.app.ApiResponse;
 import com.app.user.dto.UserDTO;
 import com.app.user.entity.User;
 import com.app.user.service.UserService;
@@ -32,26 +33,26 @@ public class UserController {
 
     @PostMapping("/save")
     @ApiOperation(value = "Kullanıcı kaydeden servis.")
-    public void save(@RequestBody User user) {
-        userService.save(user);
+    public ApiResponse save(@RequestBody User user) {
+        return userService.save(user);
     }
 
     @PostMapping("/saveAll")
     @ApiOperation(value = "Kullanıcı toplu kaydeden servis.")
-    public void saveAll(@RequestBody List<User> userList) {
-        userService.saveAll(userList);
+    public ApiResponse saveAll(@RequestBody List<User> userList) {
+        return userService.saveAll(userList);
     }
 
     @PostMapping("/update")
     @ApiOperation(value = "Kullanıcı güncelleyen servis.")
-    public void update(@RequestBody User user) {
-        userService.update(user);
+    public ApiResponse update(@RequestBody User user) {
+        return userService.update(user);
     }
 
     @PostMapping("/deleteById/{id}")
     @ApiOperation(value = "Id'ye göre kullanıcı silen servis.")
-    public void deleteById(@PathVariable("id") Long id) {
-        userService.deleteById(id);
+    public ApiResponse deleteById(@PathVariable("id") Long id) {
+        return userService.deleteById(id);
     }
 
 }
