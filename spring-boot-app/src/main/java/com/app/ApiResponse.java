@@ -1,26 +1,26 @@
-package com.app.user.exception;
+package com.app;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
-public class ExceptionResponse {
+public class ApiResponse {
 
-    private LocalDateTime creationDate;
+    private Date creationDate;
 
     private String code;
 
     private String message;
 
-    public ExceptionResponse(LocalDateTime creationDate, String code, String message) {
+    public ApiResponse(Date creationDate, String code, String message) {
         this.creationDate = creationDate;
         this.code = code;
         this.message = message;
     }
 
-    public LocalDateTime getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(LocalDateTime creationDate) {
+    public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 
