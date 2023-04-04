@@ -1,5 +1,6 @@
 package com.app.drone.controller;
 
+import com.app.ApiResponse;
 import com.app.drone.dto.DroneDTO;
 import com.app.drone.entity.Drone;
 import com.app.drone.service.DroneService;
@@ -32,26 +33,26 @@ public class DroneController {
 
     @PostMapping(path = "/save")
     @ApiOperation(value = "Drone kaydeden servis.")
-    public void save(@RequestBody Drone drone) {
-        droneService.save(drone);
+    public ApiResponse save(@RequestBody Drone drone) {
+        return droneService.save(drone);
     }
 
     @PostMapping(path = "/saveAll")
     @ApiOperation(value = "Drone toplu kaydeden servis.")
-    public void saveAll(@RequestBody List<Drone> drone) {
-        droneService.saveAll(drone);
+    public ApiResponse saveAll(@RequestBody List<Drone> drone) {
+        return droneService.saveAll(drone);
     }
 
     @PostMapping("/update")
     @ApiOperation(value = "Drone güncelleyen servis.")
-    public void update(@RequestBody Drone drone) {
-        droneService.update(drone);
+    public ApiResponse update(@RequestBody Drone drone) {
+        return droneService.update(drone);
     }
 
     @PostMapping(path = "/deleteById/{id}")
     @ApiOperation(value = "Id'ye göre drone silen servis.")
-    public void deleteById(@PathVariable("id") Long id) {
-        droneService.deleteById(id);
+    public ApiResponse deleteById(@PathVariable("id") Long id) {
+        return droneService.deleteById(id);
     }
 
 }

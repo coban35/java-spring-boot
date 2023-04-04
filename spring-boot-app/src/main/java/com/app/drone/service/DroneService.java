@@ -1,5 +1,6 @@
 package com.app.drone.service;
 
+import com.app.ApiResponse;
 import com.app.drone.dto.DroneDTO;
 import com.app.drone.entity.Drone;
 
@@ -11,12 +12,12 @@ public interface DroneService {
 
     DroneDTO findById(Long id);
 
-    void save(Drone drone);
+    ApiResponse save(Drone drone);
 
-    void saveAll(List<Drone> drone);
+    ApiResponse saveAll(List<Drone> drone);
 
-    void update(Drone drone);
+    ApiResponse update(Drone drone);
 
-    void deleteById(Long id);
+    ApiResponse deleteById(Long id);
 
 }

@@ -16,6 +16,13 @@ public class DroneExceptionHandler extends ResponseEntityExceptionHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DroneExceptionHandler.class);
 
+    @ExceptionHandler(DroneException.class)
+    public final ResponseEntity<ApiResponse> droneException() {
+        ApiResponse apiResponse = new ApiResponse(new Date(), "500", "An error occurred.");
+        LOGGER.error("An error occurred.");
+        return new ResponseEntity<>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     @ExceptionHandler(DroneIdNotFoundException.class)
     public final ResponseEntity<ApiResponse> droneIdNotFoundException() {
         ApiResponse apiResponse = new ApiResponse(new Date(), "404", "Drone Id Not Found.");
