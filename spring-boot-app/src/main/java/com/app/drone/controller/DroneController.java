@@ -2,7 +2,6 @@ package com.app.drone.controller;
 
 import com.app.ApiResponse;
 import com.app.drone.dto.DroneDTO;
-import com.app.drone.entity.Drone;
 import com.app.drone.service.DroneService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -33,20 +32,20 @@ public class DroneController {
 
     @PostMapping(path = "/save")
     @ApiOperation(value = "Drone kaydeden servis.")
-    public ApiResponse save(@RequestBody Drone drone) {
-        return droneService.save(drone);
+    public ApiResponse save(@RequestBody DroneDTO droneDTO) {
+        return droneService.save(droneDTO);
     }
 
     @PostMapping(path = "/saveAll")
     @ApiOperation(value = "Drone toplu kaydeden servis.")
-    public ApiResponse saveAll(@RequestBody List<Drone> drone) {
-        return droneService.saveAll(drone);
+    public ApiResponse saveAll(@RequestBody List<DroneDTO> droneDTOList) {
+        return droneService.saveAll(droneDTOList);
     }
 
     @PostMapping("/update")
     @ApiOperation(value = "Drone güncelleyen servis.")
-    public ApiResponse update(@RequestBody Drone drone) {
-        return droneService.update(drone);
+    public ApiResponse update(@RequestBody DroneDTO droneDTO) {
+        return droneService.update(droneDTO);
     }
 
     @PostMapping(path = "/deleteById/{id}")

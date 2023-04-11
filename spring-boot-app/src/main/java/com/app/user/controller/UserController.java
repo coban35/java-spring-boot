@@ -2,7 +2,6 @@ package com.app.user.controller;
 
 import com.app.ApiResponse;
 import com.app.user.dto.UserDTO;
-import com.app.user.entity.User;
 import com.app.user.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -33,20 +32,20 @@ public class UserController {
 
     @PostMapping("/save")
     @ApiOperation(value = "Kullanıcı kaydeden servis.")
-    public ApiResponse save(@RequestBody User user) {
-        return userService.save(user);
+    public ApiResponse save(@RequestBody UserDTO userDTO) {
+        return userService.save(userDTO);
     }
 
     @PostMapping("/saveAll")
     @ApiOperation(value = "Kullanıcı toplu kaydeden servis.")
-    public ApiResponse saveAll(@RequestBody List<User> userList) {
-        return userService.saveAll(userList);
+    public ApiResponse saveAll(@RequestBody List<UserDTO> userDTOList) {
+        return userService.saveAll(userDTOList);
     }
 
     @PostMapping("/update")
     @ApiOperation(value = "Kullanıcı güncelleyen servis.")
-    public ApiResponse update(@RequestBody User user) {
-        return userService.update(user);
+    public ApiResponse update(@RequestBody UserDTO userDTO) {
+        return userService.update(userDTO);
     }
 
     @PostMapping("/deleteById/{id}")

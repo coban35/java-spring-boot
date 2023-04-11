@@ -3,7 +3,6 @@ package com.app.drone.service;
 import com.app.ApiResponse;
 import com.app.drone.converter.DroneConverter;
 import com.app.drone.dto.DroneDTO;
-import com.app.drone.entity.Drone;
 import com.app.drone.exception.DroneException;
 import com.app.drone.exception.DroneIdNotFoundException;
 import com.app.drone.repository.DroneRepository;
@@ -35,9 +34,9 @@ public class DroneServiceImpl implements DroneService {
     }
 
     @Override
-    public ApiResponse save(Drone drone) {
+    public ApiResponse save(DroneDTO droneDTO) {
         try {
-            droneRepository.save(drone);
+            droneRepository.save(DroneConverter.toDrone(droneDTO));
             return createSuccessApiResponse();
         } catch (Exception e) {
             throw new DroneException();
@@ -45,9 +44,9 @@ public class DroneServiceImpl implements DroneService {
     }
 
     @Override
-    public ApiResponse saveAll(List<Drone> drone) {
+    public ApiResponse saveAll(List<DroneDTO> droneDTOList) {
         try {
-            droneRepository.saveAll(drone);
+            droneRepository.saveAll(droneDTOList.stream().map(DroneConverter::toDrone).collect(Collectors.toList()));
             return createSuccessApiResponse();
         } catch (Exception e) {
             throw new DroneException();
@@ -55,9 +54,9 @@ public class DroneServiceImpl implements DroneService {
     }
 
     @Override
-    public ApiResponse update(Drone drone) {
+    public ApiResponse update(DroneDTO droneDTO) {
         try {
-            droneRepository.save(drone);
+            droneRepository.save(DroneConverter.toDrone(droneDTO));
             return createSuccessApiResponse();
         } catch (Exception e) {
             throw new DroneException();

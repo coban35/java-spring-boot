@@ -3,7 +3,6 @@ package com.app.user.service;
 import com.app.ApiResponse;
 import com.app.user.converter.UserConverter;
 import com.app.user.dto.UserDTO;
-import com.app.user.entity.User;
 import com.app.user.exception.UserException;
 import com.app.user.exception.UserIdNotFoundException;
 import com.app.user.repository.UserRepository;
@@ -34,9 +33,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ApiResponse save(User user) {
+    public ApiResponse save(UserDTO userDTO) {
         try {
-            userRepository.save(user);
+            userRepository.save(UserConverter.toUser(userDTO));
             return createSuccessApiResponse();
         } catch (Exception e) {
             throw new UserException();
@@ -44,9 +43,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ApiResponse saveAll(List<User> userList) {
+    public ApiResponse saveAll(List<UserDTO> userDTOList) {
         try {
-            userRepository.saveAll(userList);
+            userRepository.saveAll(userDTOList.stream().map(UserConverter::toUser).collect(Collectors.toList()));
             return createSuccessApiResponse();
         } catch (Exception e) {
             throw new UserException();
@@ -54,9 +53,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ApiResponse update(User user) {
+    public ApiResponse update(UserDTO userDTO) {
         try {
-            userRepository.save(user);
+            userRepository.save(UserConverter.toUser(userDTO));
             return createSuccessApiResponse();
         } catch (Exception e) {
             throw new UserException();
