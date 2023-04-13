@@ -19,4 +19,6 @@ public interface DroneService {
 
     ApiResponse deleteById(Long id);
 
+    List<DroneDTO> getAvailableDroneList();
+
 }

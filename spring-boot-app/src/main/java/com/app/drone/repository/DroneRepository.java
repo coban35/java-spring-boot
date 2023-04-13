@@ -2,6 +2,7 @@ package com.app.drone.repository;
 
 import com.app.drone.entity.Drone;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,5 +20,8 @@ public interface DroneRepository extends JpaRepository<Drone, Long> {
     List<Drone> saveAll(Iterable drone);
 
     void deleteById(Long id);
+
+    @Query(value = "SELECT * FROM DRONE D WHERE D.USER_ID IS NULL", nativeQuery = true)
+    List<Drone> getAvailableDroneList();
 
 }

@@ -83,4 +83,9 @@ public class DroneServiceImpl implements DroneService {
         return apiResponse;
     }
 
+    @Override
+    public List<DroneDTO> getAvailableDroneList() {
+        return droneRepository.getAvailableDroneList().stream().map(DroneConverter::toDroneDTO).collect(Collectors.toList());
+    }
+
 }

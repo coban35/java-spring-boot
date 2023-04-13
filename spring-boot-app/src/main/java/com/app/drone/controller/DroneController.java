@@ -54,4 +54,9 @@ public class DroneController {
         return droneService.deleteById(id);
     }
 
+    @GetMapping(path = "/getAvailableDroneList")
+    public List<DroneDTO> getAvailableDroneList() {
+        return droneService.getAvailableDroneList();
+    }
+
 }
