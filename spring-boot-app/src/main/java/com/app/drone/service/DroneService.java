@@ -2,6 +2,7 @@ package com.app.drone.service;
 
 import com.app.ApiResponse;
 import com.app.drone.dto.DroneDTO;
+import com.app.drone.dto.RentDTO;
 
 import java.util.List;
 
@@ -20,5 +21,7 @@ public interface DroneService {
     ApiResponse deleteById(Long id);
 
     List<DroneDTO> getAvailableDroneList();
+
+    ApiResponse rent(RentDTO rentDTO);
 
 }

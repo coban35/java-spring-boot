@@ -30,4 +30,11 @@ public class DroneExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(apiResponse, HttpStatus.EXPECTATION_FAILED);
     }
 
+    @ExceptionHandler(DroneAlreadyRentedException.class)
+    public final ResponseEntity<ApiResponse> droneAlreadyRentedException() {
+        ApiResponse apiResponse = new ApiResponse(new Date(), "405", "Drone Already Rented.");
+        LOGGER.error("Drone Already Rented.");
+        return new ResponseEntity<>(apiResponse, HttpStatus.EXPECTATION_FAILED);
+    }
+
 }

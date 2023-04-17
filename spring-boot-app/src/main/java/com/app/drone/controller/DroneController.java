@@ -2,6 +2,7 @@ package com.app.drone.controller;
 
 import com.app.ApiResponse;
 import com.app.drone.dto.DroneDTO;
+import com.app.drone.dto.RentDTO;
 import com.app.drone.service.DroneService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -57,6 +58,11 @@ public class DroneController {
     @GetMapping(path = "/getAvailableDroneList")
     public List<DroneDTO> getAvailableDroneList() {
         return droneService.getAvailableDroneList();
+    }
+
+    @PostMapping(path = "/rent")
+    public ApiResponse rent(@RequestBody RentDTO rentDTO) {
+        return droneService.rent(rentDTO);
     }
 
 }
