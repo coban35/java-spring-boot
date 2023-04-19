@@ -65,4 +65,9 @@ public class DroneController {
         return droneService.rent(rentDTO);
     }
 
+    @GetMapping(path = "/droneListByUserId/{userId}")
+    public List<DroneDTO> droneListByUserId(@PathVariable("userId") Long userId) {
+        return droneService.droneListByUserId(userId);
+    }
+
 }

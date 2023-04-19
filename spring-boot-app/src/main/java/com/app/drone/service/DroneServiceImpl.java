@@ -107,6 +107,11 @@ public class DroneServiceImpl implements DroneService {
         }
     }
 
+    @Override
+    public List<DroneDTO> droneListByUserId(Long userId) {
+        return droneRepository.droneListByUserId(userId).stream().map(DroneConverter::toDroneDTO).collect(Collectors.toList());
+    }
+
     private ApiResponse createSuccessApiResponse() {
         ApiResponse apiResponse = new ApiResponse();
         apiResponse.setCreationDate(new Date());

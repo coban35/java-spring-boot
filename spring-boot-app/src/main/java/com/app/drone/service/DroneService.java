@@ -24,4 +24,6 @@ public interface DroneService {
 
     ApiResponse rent(RentDTO rentDTO);
 
+    List<DroneDTO> droneListByUserId(Long userId);
+
 }
