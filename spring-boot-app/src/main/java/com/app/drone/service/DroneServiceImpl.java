@@ -2,11 +2,10 @@ package com.app.drone.service;
 
 import com.app.ApiResponse;
 import com.app.drone.converter.DroneConverter;
+import com.app.drone.dto.DeliverDTO;
 import com.app.drone.dto.DroneDTO;
 import com.app.drone.dto.RentDTO;
-import com.app.drone.exception.DroneAlreadyRentedException;
-import com.app.drone.exception.DroneException;
-import com.app.drone.exception.DroneIdNotFoundException;
+import com.app.drone.exception.*;
 import com.app.drone.repository.DroneRepository;
 import com.app.user.exception.UserIdNotFoundException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -95,7 +94,7 @@ public class DroneServiceImpl implements DroneService {
             DroneDTO droneDTO = findById(rentDTO.getDroneId());
             if (droneDTO.getUserId() == null) {
                 droneDTO.setUserId(rentDTO.getUserId());
-                save(droneDTO);
+                update(droneDTO);
                 return createSuccessApiResponse();
             } else {
                 throw new DroneAlreadyRentedException();
@@ -110,6 +109,35 @@ public class DroneServiceImpl implements DroneService {
     @Override
     public List<DroneDTO> droneListByUserId(Long userId) {
         return droneRepository.droneListByUserId(userId).stream().map(DroneConverter::toDroneDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public ApiResponse deliver(DeliverDTO deliverDTO) {
+        if (deliverDTO.getDroneId() == null) {
+            throw new DroneIdNotFoundException();
+        }
+        if (deliverDTO.getUserId() == null) {
+            throw new UserIdNotFoundException();
+        }
+        try {
+            DroneDTO droneDTO = findById(deliverDTO.getDroneId());
+            if (droneDTO.getUserId() == null) {
+                throw new DroneAlreadyAvailableException();
+            } else {
+                if (!droneDTO.getUserId().equals(deliverDTO.getUserId())) {
+                    throw new DroneIsOnDifferentUserException();
+                } else {
+                    droneDTO.setUserId(null);
+                    update(droneDTO);
+                    return createSuccessApiResponse();
+                }
+            }
+        } catch (DroneIdNotFoundException | UserIdNotFoundException | DroneAlreadyAvailableException |
+                 DroneIsOnDifferentUserException | DroneException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new DroneException();
+        }
     }
 
     private ApiResponse createSuccessApiResponse() {

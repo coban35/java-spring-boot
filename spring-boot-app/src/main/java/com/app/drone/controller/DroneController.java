@@ -1,6 +1,7 @@
 package com.app.drone.controller;
 
 import com.app.ApiResponse;
+import com.app.drone.dto.DeliverDTO;
 import com.app.drone.dto.DroneDTO;
 import com.app.drone.dto.RentDTO;
 import com.app.drone.service.DroneService;
@@ -68,6 +69,11 @@ public class DroneController {
     @GetMapping(path = "/droneListByUserId/{userId}")
     public List<DroneDTO> droneListByUserId(@PathVariable("userId") Long userId) {
         return droneService.droneListByUserId(userId);
+    }
+
+    @PostMapping("/deliver")
+    public ApiResponse deliver(@RequestBody DeliverDTO deliverDTO) {
+        return droneService.deliver(deliverDTO);
     }
 
 }

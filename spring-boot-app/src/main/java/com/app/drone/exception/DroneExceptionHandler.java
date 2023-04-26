@@ -37,4 +37,19 @@ public class DroneExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(apiResponse, HttpStatus.EXPECTATION_FAILED);
     }
 
+    @ExceptionHandler(DroneAlreadyAvailableException.class)
+    public final ResponseEntity<ApiResponse> droneAlreadyAvailableException() {
+        ApiResponse apiResponse = new ApiResponse(new Date(), "406", "Drone Already Available.");
+        LOGGER.error("Drone Already Available.");
+        return new ResponseEntity<>(apiResponse, HttpStatus.EXPECTATION_FAILED);
+    }
+
+    @ExceptionHandler(DroneIsOnDifferentUserException.class)
+    public final ResponseEntity<ApiResponse> droneIsOnDifferentUserException() {
+        ApiResponse apiResponse = new ApiResponse(new Date(), "407", "Drone Is On Different User.");
+        LOGGER.error("Drone Is On Different User.");
+        return new ResponseEntity<>(apiResponse, HttpStatus.EXPECTATION_FAILED);
+    }
+
+
 }

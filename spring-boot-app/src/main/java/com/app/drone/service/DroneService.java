@@ -1,6 +1,7 @@
 package com.app.drone.service;
 
 import com.app.ApiResponse;
+import com.app.drone.dto.DeliverDTO;
 import com.app.drone.dto.DroneDTO;
 import com.app.drone.dto.RentDTO;
 
@@ -25,5 +26,7 @@ public interface DroneService {
     ApiResponse rent(RentDTO rentDTO);
 
     List<DroneDTO> droneListByUserId(Long userId);
+
+    ApiResponse deliver(DeliverDTO deliverDTO);
 
 }
