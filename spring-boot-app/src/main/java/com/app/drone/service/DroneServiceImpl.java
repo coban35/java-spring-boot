@@ -68,10 +68,17 @@ public class DroneServiceImpl implements DroneService {
     @Override
     public ApiResponse deleteById(Long id) {
         try {
-            droneRepository.deleteById(id);
-            return createSuccessApiResponse();
-        } catch (EmptyResultDataAccessException e) {
+            DroneDTO droneDTO = findById(id);
+            if (droneDTO.getUserId() == null) {
+                droneRepository.deleteById(id);
+                return createSuccessApiResponse();
+            } else {
+                throw new DroneCannotBeDeletedException();
+            }
+        } catch (DroneIdNotFoundException | EmptyResultDataAccessException e) {
             throw new DroneIdNotFoundException();
+        } catch (DroneCannotBeDeletedException e) {
+            throw e;
         } catch (Exception e) {
             throw new DroneException();
         }

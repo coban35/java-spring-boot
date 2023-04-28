@@ -30,4 +30,11 @@ public class UserExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(apiResponse, HttpStatus.EXPECTATION_FAILED);
     }
 
+    @ExceptionHandler(UserCannotBeDeletedException.class)
+    public final ResponseEntity<ApiResponse> userCannotBeDeletedException() {
+        ApiResponse apiResponse = new ApiResponse(new Date(), "405", "User Cannot Be Deleted.");
+        LOGGER.error("User Cannot Be Deleted.");
+        return new ResponseEntity<>(apiResponse, HttpStatus.EXPECTATION_FAILED);
+    }
+
 }

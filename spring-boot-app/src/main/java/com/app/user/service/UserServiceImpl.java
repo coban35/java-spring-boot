@@ -3,9 +3,11 @@ package com.app.user.service;
 import com.app.ApiResponse;
 import com.app.user.converter.UserConverter;
 import com.app.user.dto.UserDTO;
+import com.app.user.exception.UserCannotBeDeletedException;
 import com.app.user.exception.UserException;
 import com.app.user.exception.UserIdNotFoundException;
 import com.app.user.repository.UserRepository;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -69,6 +71,8 @@ public class UserServiceImpl implements UserService {
             return createSuccessApiResponse();
         } catch (EmptyResultDataAccessException e) {
             throw new UserIdNotFoundException();
+        } catch (DataIntegrityViolationException e) {
+            throw new UserCannotBeDeletedException();
         } catch (Exception e) {
             throw new UserException();
         }

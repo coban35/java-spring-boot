@@ -51,5 +51,11 @@ public class DroneExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(apiResponse, HttpStatus.EXPECTATION_FAILED);
     }
 
+    @ExceptionHandler(DroneCannotBeDeletedException.class)
+    public final ResponseEntity<ApiResponse> droneCannotBeDeletedException() {
+        ApiResponse apiResponse = new ApiResponse(new Date(), "408", "Drone cannot be deleted.");
+        LOGGER.error("Drone cannot be deleted.");
+        return new ResponseEntity<>(apiResponse, HttpStatus.EXPECTATION_FAILED);
+    }
 
 }
